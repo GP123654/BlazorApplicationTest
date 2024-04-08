@@ -1,0 +1,713 @@
+﻿@page "/userPageViews"
+
+@using DataAccessLibrary
+@using DataAccessLibrary.Models
+
+@inject IUserPageViewsData _dataAccess
+
+@using BlazorApp3.Data;
+@using OfficeOpenXml.Style;
+@using OfficeOpenXml;
+@inject IJSRuntime iJSRuntime;
+
+
+
+<style>
+    ::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+
+    /* Scroll bar track */
+    ::-webkit-scrollbar-track {
+        background: white;
+    }
+
+    /* Scroll bar movable thing / thumb */
+    ::-webkit-scrollbar-thumb {
+        background: mediumPurple;
+        border-radius: 10px;
+    }
+</style>
+
+
+<!-- //////// Page Layout //////// -->
+
+
+<PageTitle>User Page Views</PageTitle>
+
+
+
+<h3 style="color:mediumpurple;">User Page Views</h3>
+
+<hr style="height:2px; background-color:black; margin-bottom: 5px; margin-right: 40%; margin-bottom:20px" />
+
+@if (finalPivotedDatas is null)
+{
+    <p><em>Loading ...</em></p>
+
+    <!-- Skeleton lines when loading just for fun -->
+    <MudSkeleton Height="40px" />
+    <MudSkeleton Height="40px" />
+    <MudSkeleton Height="40px" />
+    <MudSkeleton Height="40px" />
+    <MudSkeleton Height="40px" />
+    <MudSkeleton Height="40px" />
+    <MudSkeleton Height="40px" />
+
+    <!-- A loading circle progress bar just for fun -->
+    <div style="text-align:center; margin-top:15px">
+        <MudProgressCircular Color="Color.Primary" Style="height:100px;width:100px;" Indeterminate="true" />
+    </div>
+
+}
+else
+{
+
+    <h1 style="color:mediumpurple; margin-top:40px;">--------- FINAL TABLE ---------</h1>
+
+
+    <h4 style="color:mediumpurple; margin-top:40px;">Dynamic SQL MudSimpleTable</h4>
+
+
+    <div style="margin-top:80px; margin-bottom:50px">
+
+        <!-- Table with different parameters that affect it -->
+        <MudSimpleTable Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" FixedHeader="@fixedheader" Style="@(fixedheader?"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;":"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;")">
+
+
+            <tbody>
+
+                <!-- Rows of data -->
+                @foreach (var systemUsage in systemUsages)
+                {
+                    <tr>
+                        <td>@systemUsage.WebPage</td>
+                        <td>@systemUsage.System1</td>
+                        <td>@systemUsage.System2</td>
+                        <td>@systemUsage.System3</td>
+                        <td>@systemUsage.System4</td>
+                        <td>@systemUsage.System5</td>
+                        <td>@systemUsage.System6</td>
+                        <td>@systemUsage.System7</td>
+                        <td>@systemUsage.System8</td>
+                        <td>@systemUsage.System9</td>
+                        <td>@systemUsage.System10</td>
+                        <td>@systemUsage.System11</td>
+
+
+
+                        @*@foreach(var systemsUsed in SystemsBeingUseds)
+                {
+                var key = @systemUsage.empty;
+                var val = @systemsUsed.Systems;
+
+                <td>@upvm.Add(key, val)</td>*@
+
+                        @*<td>@(darrensFinal.empty + systemsUsed.Systems)</td>
+                }*@
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+
+        <!-- Toolbar for customization switches -->
+        <MudToolBar>
+            <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+            <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+            <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+            <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+            <MudSwitch @bind-Checked="@fixedheader">Fixed Header</MudSwitch>
+        </MudToolBar>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Darrens MudSimpleTable -->
+
+    
+
+    <div style="margin-top:40px; margin-bottom:50px">
+
+        <!-- Table with different parameters that affect it -->
+        <MudSimpleTable Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" FixedHeader="@fixedheader" Style="@(fixedheader?"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;":"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;")">
+
+            <!-- Headings -->
+            
+
+            @*<thead style="color:mediumpurple">
+                <tr>
+                    <th>Web Page</th>
+                <th>System 1</th>
+                <th>System 2</th>
+                <th>System 3</th>
+                <th>System 4</th>
+                <th>System 5</th>
+                <th>System 6</th>
+                <th>System 7</th>
+                <th>System 8</th>
+                <th>System 9</th>
+                </tr>
+
+            </thead>*@
+
+
+            @*<thead>
+                <tr>
+                @foreach(var systemsUsed in SystemsBeingUseds)
+                {                   
+                    <th>@systemsUsed.Systems</th>                                      
+                }
+                </tr>
+            </thead>*@
+
+
+            
+                @*<thead> 
+                    <tr>
+                    @foreach (var systemsUsed in SystemsBeingUseds)
+                    {
+                        @*<th>@systemsUsed.Systems</th>
+                        <th>@systemsUsed.rowid</th>
+                        <th>@(systemsUsed.Systems + systemsUsed.rowid)</th>
+                    }
+                    </tr>
+                </thead>*@
+            
+
+            <tbody>
+
+                <!-- Rows of data -->
+                @foreach (var darrensFinal in darrensPivotedDatas)
+                {
+                    <tr>
+                        <td>@darrensFinal.WebPage</td>                    
+
+
+                        @*@foreach(var systemsUsed in SystemsBeingUseds)
+                        {                   
+                            <td>@(darrensFinal.System1 + "." + systemsUsed.Systems)</td>
+                            <td>@(darrensFinal.Systems)</td>
+                        }*@
+
+
+                        @*@foreach(var systemsUsed in SystemsBeingUseds)
+                        {   
+                            <td>@(darrensFinal.empty + systemsUsed.Systems)</td>
+                        }*@
+                       
+
+
+                        
+
+                        <td>@darrensFinal.System1</td>
+                        <td>@darrensFinal.System2</td>
+                        <td>@darrensFinal.System3</td>
+                        <td>@darrensFinal.System4</td>
+                        <td>@darrensFinal.System5</td>
+                        <td>@darrensFinal.System6</td>
+                        <td>@darrensFinal.System7</td>
+                        <td>@darrensFinal.System8</td>
+                        <td>@darrensFinal.System9</td>
+                        <td>@darrensFinal.System10</td>
+                        <td>@darrensFinal.System11</td>
+
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+
+        <!-- Toolbar for customization switches -->
+        <MudToolBar>
+            <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+            <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+            <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+            <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+            <MudSwitch @bind-Checked="@fixedheader">Fixed Header</MudSwitch>
+        </MudToolBar>
+
+    </div>
+
+
+
+
+@*
+    <!-- MudTable -->
+
+    <h4 style="color:mediumpurple; margin-top:40px;">MudTable</h4>
+
+    <div style="margin-top:40px; margin-bottom:50px">
+
+        <!-- Table with different parameters that affect it -->
+        <MudTable ServerData="@(new Func<TableState, Task<TableData<SourceRowDto>>>())" Items="@Elements" Height="@(fixed_header2 ?" 380px":"")" Style="box-shadow:2px 2px 2px 2px mediumPurple">
+
+            <!-- Headings -->
+            <HeaderContent>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.WebPage)">Web Page</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.Capfin)">Capfin</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.CasDemo)">CasDemo</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.FNB)">FNB</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.FNBCCard)">FNBCCard</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.FNBLoans)">FNBLoans</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.jdfspost)">jdfspost</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.Lewis)">Lewis</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.PrimeBank)">PrimeBank</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.Wesbank)">Wesbank</MudTableSortLabel></MudTh>
+            </HeaderContent>
+
+            <!-- Rows of data -->
+            <RowTemplate>
+                <MudTd DataLabel="WebPage"><MudHighlighter Text="@context.WebPage" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="Capfin"><MudHighlighter Text="@context.Capfin" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="CasDemo"><MudHighlighter Text="@context.CasDemo" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="FNB"><MudHighlighter Text="@context.FNB" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="FNBCCard"><MudHighlighter Text="@context.FNBCCard" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="FNBLoans"><MudHighlighter Text="@context.FNBLoans" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="jdfspost"><MudHighlighter Text="@context.jdfspost" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="Lewis"><MudHighlighter Text="@context.Lewis" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="PrimeBank"><MudHighlighter Text="@context.PrimeBank" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="Wesbank"><MudHighlighter Text="@context.Wesbank" HighlightedText="@searchString1" /></MudTd>
+            </RowTemplate>
+
+            <!-- Pager -->
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{10, 15, 25, 50, 75, 100, 150}" />
+            </PagerContent>
+        </MudTable>
+
+    </div>
+*@
+
+
+
+
+
+
+
+    <div style="padding-left: 30px">
+        <p>Download Excel Document</p>
+        <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" Color="@Color.Success" OnClick="@GenerateExcel"></MudIconButton>
+    </div>
+
+
+
+    <h1 style="color:mediumpurple; margin-top:40px;">----- TESTS AND ALTERANTIVE TABLES -----</h1>
+
+
+    <!-- MudSimpleTable -->
+
+    <h4 style="color:mediumpurple; margin-top:40px;">MudSimpleTable</h4>
+
+    <div style="margin-top:40px; margin-bottom:50px">
+
+        <!-- Table with different parameters that affect it -->
+        <MudSimpleTable Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" FixedHeader="@fixedheader" Style="@(fixedheader?"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;":"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;")">
+
+            <!-- Headings -->
+            <thead style="color:mediumpurple">
+                <tr>
+                    <th>Web Page</th>
+                    <th>Capfin</th>
+                    <th>CasDemo</th>
+                    <th>FNB</th>
+                    <th>FNBCCard</th>
+                    <th>FNBLoans</th>
+                    <th>jdfspost</th>
+                    <th>Lewis</th>
+                    <th>PrimeBank</th>
+                    <th>Wesbank</th>
+                </tr>
+
+            </thead>
+            <tbody>
+
+                <!-- Rows of data -->
+                @foreach (var final in finalPivotedDatas)
+                {
+                    <tr>
+                        <td>@final.WebPage</td>
+                        <td>@final.Capfin</td>
+                        <td>@final.CasDemo</td>
+                        <td>@final.FNB</td>
+                        <td>@final.FNBCCard</td>
+                        <td>@final.FNBLoans</td>
+                        <td>@final.jdfspost</td>
+                        <td>@final.Lewis</td>
+                        <td>@final.PrimeBank</td>
+                        <td>@final.Wesbank</td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+
+        <!-- Toolbar for customization switches -->
+        <MudToolBar>
+            <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+            <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+            <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+            <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+            <MudSwitch @bind-Checked="@fixedheader">Fixed Header</MudSwitch>
+        </MudToolBar>
+
+    </div>
+
+    
+
+
+    <!-- Selecting * from a table MudSimpleTable -->
+
+    @*<h4 style="color:mediumpurple; margin-top:40px;">Selecting * from a table MudSimpleTable</h4>
+
+    <div style="margin-top:40px; margin-bottom:50px">
+
+        <!-- Table with different parameters that affect it -->
+        <MudSimpleTable Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" FixedHeader="@fixedheader" Style="@(fixedheader?"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;":"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple;")">
+
+            <!-- Headings -->
+            <thead style="color:mediumpurple">
+                <tr>*@
+                    @*<th>Web Page</th>
+                <th>System 1</th>
+                <th>System 2</th>
+                <th>System 3</th>
+                <th>System 4</th>
+                <th>System 5</th>
+                <th>System 6</th>
+                <th>System 7</th>
+                <th>System 8</th>
+                <th>System 9</th>
+                </tr>*@
+                @*
+            </thead>
+            <tbody>
+
+                <!-- Rows of data -->
+                @foreach (var selectAll in selectAllFromPivotedDatas)
+                {
+                    <tr>
+                        <td>@selectAll.WebPage</td>
+
+                        <td>@selectAll.System1</td>
+                        <td>@selectAll.System2</td>
+                        <td>@selectAll.System3</td>
+                        <td>@selectAll.System4</td>
+                        <td>@selectAll.System5</td>
+                        <td>@selectAll.System6</td>
+                        <td>@selectAll.System7</td>
+                        <td>@selectAll.System8</td>
+                        <td>@selectAll.System9</td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+
+        <!-- Toolbar for customization switches -->
+        <MudToolBar>
+            <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+            <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+            <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+            <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+            <MudSwitch @bind-Checked="@fixedheader">Fixed Header</MudSwitch>
+        </MudToolBar>
+
+    </div>*@
+
+
+
+
+
+
+
+    <!-- MudTable -->
+
+    <h4 style="color:mediumpurple; margin-top:40px;">MudTable</h4>
+
+    <div style="margin-top:40px; margin-bottom:50px">
+
+        <!-- Table with different parameters that affect it -->
+        <MudTable Items="@Elements" FixedHeader="@fixed_header2" Height="@(fixed_header2 ?" 380px":"")" Dense="@dense2" Hover="@hover2" Bordered="@bordered2" Striped="@striped2" Filter="new Func<UserPageViewsModel,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1" Style="box-shadow:2px 2px 2px 2px mediumPurple">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Web Page Views</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Immediate="true" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+
+            <!-- Headings -->
+            <HeaderContent>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.WebPage)">Web Page</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.Capfin)">Capfin</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.CasDemo)">CasDemo</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.FNB)">FNB</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.FNBCCard)">FNBCCard</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.FNBLoans)">FNBLoans</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.jdfspost)">jdfspost</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.Lewis)">Lewis</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.PrimeBank)">PrimeBank</MudTableSortLabel></MudTh>
+                <MudTh Style="color:mediumPurple;"><MudTableSortLabel SortBy="new Func<UserPageViewsModel, object>(x=>x.Wesbank)">Wesbank</MudTableSortLabel></MudTh>
+            </HeaderContent>
+
+            <!-- Rows of data -->
+            <RowTemplate>
+                <MudTd DataLabel="WebPage"><MudHighlighter Text="@context.WebPage" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="Capfin"><MudHighlighter Text="@context.Capfin" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="CasDemo"><MudHighlighter Text="@context.CasDemo" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="FNB"><MudHighlighter Text="@context.FNB" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="FNBCCard"><MudHighlighter Text="@context.FNBCCard" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="FNBLoans"><MudHighlighter Text="@context.FNBLoans" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="jdfspost"><MudHighlighter Text="@context.jdfspost" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="Lewis"><MudHighlighter Text="@context.Lewis" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="PrimeBank"><MudHighlighter Text="@context.PrimeBank" HighlightedText="@searchString1" /></MudTd>
+                <MudTd DataLabel="Wesbank"><MudHighlighter Text="@context.Wesbank" HighlightedText="@searchString1" /></MudTd>
+            </RowTemplate>
+
+            <!-- Pager -->
+            <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[]{10, 15, 25, 50, 75, 100, 150}" />
+            </PagerContent>
+        </MudTable>
+
+        <!-- Toolbar for customization switches -->
+        <div class="d-flex flex-wrap mt-4">
+                <MudSwitch @bind-Checked="@hover2" Color="Color.Primary">Hover</MudSwitch>
+                <MudSwitch @bind-Checked="@dense2" Color="Color.Secondary">Dense</MudSwitch>
+                <MudSwitch @bind-Checked="@striped2" Color="Color.Tertiary">Striped</MudSwitch>
+                <MudSwitch @bind-Checked="@bordered2" Color="Color.Warning">Bordered</MudSwitch>
+                <MudSwitch @bind-Checked="@fixed_header2">Fixed Header</MudSwitch>
+            <MudSpacer />
+        </div>
+
+    </div>
+
+
+
+
+    <!-- HTML Table -->
+
+    <table class="table" style="margin-top:40px; margin-bottom:40px">
+
+        <!-- Headings -->
+        <thead style="color:mediumpurple">
+            <tr>
+                <th>Web Page</th>
+                <th>Capfin</th>
+                <th>CasDemo</th>
+                <th>FNB</th>
+                <th>FNBCCard</th>
+                <th>FNBLoans</th>
+                <th>jdfspost</th>
+                <th>Lewis</th>
+                <th>PrimeBank</th>
+                <th>Wesbank</th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            <!-- Rows of data -->
+            @foreach (var finalPivData in finalPivotedDatas)
+            {
+                <tr>
+                    <td>@finalPivData.WebPage</td>
+                    <td>@finalPivData.Capfin</td>
+                    <td>@finalPivData.CasDemo</td>
+                    <td>@finalPivData.FNB</td>
+                    <td>@finalPivData.FNBCCard</td>
+                    <td>@finalPivData.FNBLoans</td>
+                    <td>@finalPivData.jdfspost</td>
+                    <td>@finalPivData.Lewis</td>
+                    <td>@finalPivData.PrimeBank</td>
+                    <td>@finalPivData.Wesbank</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+}
+
+
+<!-- CODE SECTION -->
+
+@code {
+
+    //------------------------------------------------------//
+    //MudSimpleTable customization controls
+
+    bool fixedheader = true;
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+
+
+    //------------------------------------------------------//
+    //MudTable customization controls
+
+    bool fixed_header2 = true;
+    private bool dense2 = false;
+    private bool hover2 = true;
+    private bool striped2 = false;
+    private bool bordered2 = false;
+    private string searchString1 = "";
+
+
+
+    //------------------------------------------------------//
+    //Searching / Filtering for MudTable
+
+    //
+    private UserPageViewsModel? selectedItem1;
+    //
+    private HashSet<UserPageViewsModel> selectedItems = new HashSet<UserPageViewsModel>();
+
+    //
+    private IEnumerable<UserPageViewsModel> Elements = new List<UserPageViewsModel>();
+    //
+    private bool FilterFunc1(UserPageViewsModel element) => FilterFunc(element, searchString1);
+
+    //
+    private bool FilterFunc(UserPageViewsModel element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.WebPage.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.Capfin}, {element.CasDemo}, {element.FNB}, {element.FNBCCard}, {element.FNBLoans}, {element.jdfspost}, {element.Lewis}, {element.PrimeBank}, {element.Wesbank}".Contains(searchString))
+            return true;
+        return false;
+    }
+
+
+    //------------------------------------------------------//
+    //Initializing the data to be used in the tables
+
+    //List for storing UserPageViewsModel objects
+    private List<UserPageViewsModel>? systemUsages;
+
+    //List for storing UserPageViewsModel objects
+    private List<UserPageViewsModel>? finalPivotedDatas;
+
+    //List for storing UserPageViewsModel objects
+    private List<UserPageViewsModel>? darrensPivotedDatas;
+
+    //List for storing UserPageViewsModel objects
+    private List<UserPageViewsModel>? selectAllFromPivotedDatas;
+
+    //List for storing UserPageViewsModel objects
+    private List<UserPageViewsModel>? SystemsBeingUseds;
+
+    //private List<string> systems = new List<string> { "System1", "System2" };
+
+    
+
+    //Initializes the data asyncrously
+    protected override async Task OnInitializedAsync()
+    {
+        //This is used for the search / filtering of the table
+        Elements = await _dataAccess.GetFinalPivotedData();
+
+        systemUsages = await _dataAccess.GetSystemUsage();
+
+        //Stores the data from the database
+        finalPivotedDatas = await _dataAccess.GetFinalPivotedData();
+        //Stores the data from the database
+        darrensPivotedDatas = await _dataAccess.GetDarrensPivotedData();
+        //Stores the data from the database
+        selectAllFromPivotedDatas = await _dataAccess.SelectAllFromPivotedData();
+        //Stores the data from the database
+        SystemsBeingUseds = await _dataAccess.GetSystemsBeingUsed();
+
+    }
+    
+    
+
+
+
+    //Trying to generate a Excel spreadsheet
+    public void GenerateExcel(IJSRuntime iJSRuntime)
+    {
+        //Creating a byte array
+        byte[] fileContent;
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+        using (var package = new ExcelPackage())
+        {
+            var worksheet = package.Workbook.Worksheets.Add("UserPageViews");
+
+            #region Headers
+
+            worksheet.Cells[1, 1].Value = "WebPage";
+            worksheet.Cells[1, 1].Style.Font.Size = 12;
+            worksheet.Cells[1, 1].Style.Font.Bold = true;
+            worksheet.Cells[1, 1].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+            worksheet.Cells[1, 2].Value = "Capfin";
+            worksheet.Cells[1, 2].Style.Font.Size = 12;
+            worksheet.Cells[1, 2].Style.Font.Bold = true;
+            worksheet.Cells[1, 2].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+            #endregion
+
+
+            #region First Row / Maybe column will try and see
+
+            worksheet.Cells[2, 1].Value = "0";
+            worksheet.Cells[2, 1].Style.Font.Size = 12;
+            worksheet.Cells[2, 1].Style.Font.Bold = true;
+            worksheet.Cells[2, 1].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+            worksheet.Cells[2, 2].Value = "0";
+            worksheet.Cells[2, 2].Style.Font.Size = 12;
+            worksheet.Cells[2, 2].Style.Font.Bold = true;
+            worksheet.Cells[2, 2].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+            #endregion
+
+
+            //foreach(var finalPivData in finalPivotedDatas)
+            //{
+            //        for (int i = 0; i > finalPivotedDatas.Count; i++)
+            //        {
+            //            worksheet.Cells[1, i].Value = finalPivData.WebPage;
+            //            worksheet.Cells[1, i].Style.Font.Size = 12;
+            //            worksheet.Cells[1, i].Style.Font.Bold = true;
+            //            worksheet.Cells[1, i].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+            //        }
+            //}
+
+
+            //Storing all the data into a byte array
+            fileContent = package.GetAsByteArray();
+
+
+        }
+
+        //Creating a excel file
+        iJSRuntime.InvokeAsync<UserPageViews>(
+            "saveAsFile", "UserPageViews List.xlsx", Convert.ToBase64String(fileContent)
+            );
+    }
+
+
+
+    private void GenerateExcel()
+    {
+        UserPageViews pageViewsExcel = new UserPageViews();
+        pageViewsExcel.GenerateExcel(iJSRuntime);
+    }
+
+
+}

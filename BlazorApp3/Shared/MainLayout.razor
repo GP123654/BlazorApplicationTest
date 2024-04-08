@@ -1,0 +1,49 @@
+﻿@inherits LayoutComponentBase
+
+<!-- For using mud blazor -->
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<style>
+    body::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+
+    /* Scroll bar track */
+    body::-webkit-scrollbar-track {
+        background: #1a1a1a; /*#121212*/
+    }
+
+    /* Scroll bar movable thing / thumb */
+    body::-webkit-scrollbar-thumb {
+        background: mediumPurple;
+        border-radius: 10px;
+    }
+</style>
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        Gregs Blazor App
+        <MudSpacer />
+        <MudIconButton Href="/shoppingCart" Icon="@Icons.Material.Outlined.ShoppingCart" Color="Color.Inherit" Edge="Edge.Start" />
+        <LoginDisplay/>
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Always">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent Style="margin:15px">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

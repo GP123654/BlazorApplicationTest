@@ -1,0 +1,268 @@
+﻿@page "/subscription"
+
+
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+    /* Style the table */
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+        box-shadow: 0px 0px 15px mediumPurple;
+    }
+
+    /* Style table headers and table data */
+    th, td {
+        text-align: center;
+        padding: 16px;
+    }
+
+    th:first-child, td:first-child {
+        text-align: left;
+    }
+
+    /* Zebra-striped table rows */
+    tr:nth-child(even) {
+        background-color: #B39DDB
+    }
+
+    .fa-check {
+        color: green;
+    }
+
+    .fa-remove {
+        color: red;
+    }
+
+
+
+
+    /* Style the form element with a border around it */
+    form {
+        border: 4px solid mediumPurple;
+    }
+
+    /* Add some padding and a grey background color to containers */
+    .container {
+        padding: 20px;
+        background-color: #f1f1f1;
+    }
+
+    /* Style the input elements and the submit button */
+    input[type=text], input[type=submit] {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Add margins to the checkbox */
+    input[type=checkbox] {
+        margin-top: 16px;
+    }
+
+    /* Style the submit button */
+    input[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        border: none;
+    }
+
+        input[type=submit]:hover {
+            opacity: 0.8;
+        }
+
+
+
+    .signInBtn {
+        width: 60%;
+        padding: 10px 20px;
+        outline: none;
+        font-weight: 500;
+        border: none;
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #ffffff;
+        background: #673AB7;
+        border-radius: 30px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        /*box-shadow: 5px 5px 5px purple;*/
+    }
+
+        .signInBtn:hover {
+            background: #7E57C2;
+            box-shadow: 0px 0px 40px mediumPurple;
+        }
+
+
+</style>
+
+
+<MudContainer Class="mt-16" Style="margin-bottom: 60px">
+    <MudText Typo="Typo.h2" Align="Align.Center" Style="color:mediumpurple;" GutterBottom="true">Monthly Subscriptions</MudText>
+    <MudText Align="Align.Center">Some long pricing text should go here maybe? who knows what text you would want here, i guess i cant fill it in for you.</MudText>
+    
+    <h3 style="color:mediumpurple; margin-top:25px">Pricing</h3>
+    
+    <MudGrid Class="mt-8">
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Seedling</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h3">R5</MudText>
+                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Month</MudText>
+                    </div>
+                    <MudList Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            Unlimited something
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            10 something
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            No something
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Join Now</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Sprout</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h3">R15</MudText>
+                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Month</MudText>
+                    </div>
+                    <MudList Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            Unlimited something
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            10 something
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            No something
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Join Now</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="4">
+            <MudCard Elevation="25" Class="rounded-lg pb-4">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h5" Align="Align.Center">Flower</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h3">R30</MudText>
+                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Month</MudText>
+                    </div>
+                    <MudList Class="mx-auto mt-4" Style="width:300px;">
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            Unlimited something
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            10 something
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
+                            No something
+                        </MudListItem>
+                    </MudList>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Join Now</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+
+
+<h3 style="color:mediumpurple; margin-top:25px; margin-bottom:10px">Table of features</h3>
+
+<table style="margin-bottom: 60px">
+    <tr>
+        <th style="width:50%">Features</th>
+        <th>Seedling</th>
+        <th>Sprout</th>
+        <th>Flower</th>
+    </tr>
+    <tr>
+        <td>Birthday Voucher</td>
+        <td>R 10</td>
+        <td>R 50</td>
+        <td>R 100</td>
+    </tr>
+    <tr>
+        <td>Access to Coffee Shop</td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+        <td><i class="fa fa-check"></i></td>
+    </tr>
+    <tr>
+        <td>Roses</td>
+        <td><i class="fa fa-remove"></i></td>
+        <td>2 Roses</td>
+        <td>6 Roses</td>
+    </tr>
+    <tr>
+        <td>Daisys</td>
+        <td>1 Daisy</td>
+        <td>3 Daisys</td>
+        <td>5 Daisys</td>
+    </tr>
+</table>
+
+
+
+<h3 style="color:mediumpurple; margin-top:25px; margin-bottom:10px">Subscribe to our Newsletter</h3>
+
+<form style="margin-bottom:30px">
+    <div class="container" style="background-color:white">
+        <input type="text" placeholder="Name" name="name" required>
+        <input type="text" placeholder="Email address" name="mail" required>
+        <label>
+            <input type="checkbox" checked="checked" name="subscribe"> Monthly Newsletter
+        </label>
+    </div>
+
+    <div style="text-align:center;">
+        <button class="signInBtn">Subscribe</button>
+    </div>
+
+</form>
+
+
+
+
+@code {
+
+}

@@ -1,0 +1,26 @@
+﻿@page "/authors"
+@inject NavigationManager NavigationManager
+
+<!-- Heading -->
+<h3 style="color:mediumpurple;">Authors</h3>
+<hr />
+
+<!-- link -->
+<p>
+<a href="/authors/authorsDetails/11">JK Rowling</a>
+</p>
+
+<!-- MudBlazor button -->
+<MudButton Variant="Variant.Filled" Color="Color.Primary" Style="border-radius:30px; text-align:center; margin-top:20px;" @onclick="Navigate">Click Me</MudButton>
+
+
+<!-- CODE SECTION -->
+
+@code {
+    
+    //Method to navigate to a different page
+    private void Navigate()
+    {
+        NavigationManager.NavigateTo("/authors/authorsDetails/22");
+    }
+}

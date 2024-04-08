@@ -1,0 +1,358 @@
+﻿@page "/store"
+
+
+<style>
+    
+    .banner-area2 {
+        width: 100%;
+        height: 300px; /*was 400*/
+        position: relative;
+        top: 0;
+        background-image: url("../Images/StoreHead1.jpg");
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .banner-area2 h2 {
+        text-align: center;
+        padding-top: 40px; /*was 150*/
+        font-size: 70px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-transform: uppercase;
+        color: mediumpurple; /*Was #fff*/
+    }
+
+
+
+    /********************************/
+
+    .body18{
+        margin:0;
+        padding:0;
+    }
+
+    .container18{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        flex-direction: column
+    }
+
+    .container18 a{
+        position:relative;
+        width: 300px;
+        height: 75px;
+        margin: 10px 0;
+        font-size:24px;
+        color: black;
+        display: inline-flex;
+        justify-content:center;
+        align-items:center;
+        text-decoration:none;
+        transition:0.5s;
+    }
+
+    .container18 a:hover{
+        color:white;
+    }
+
+    .container18 a:before {
+        content:'';
+        position: absolute;
+        top:0;
+        left:0;
+        width:0;
+        height:100%;
+        background: url(/images/btn-bg1.png);
+        background-size:cover;
+        transform-origin: left;
+        transition: 0.8s;
+    }
+
+    .container18 a:nth-child(2):before {
+        background: url(/images/btn-bg2.png);
+        background-size: cover;
+    }
+
+    .container18 a:hover:before{
+          width: 100%;
+    }
+
+    .container18 a span{
+        position:relative;
+        z-index:auto;
+    }
+
+
+
+    /********************************/
+
+    /*.body19{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    section{
+        position:relative;
+        width:100%;
+        min-height:100vh;
+        background: url(/images/bg.jpg);
+        background-size:cover;
+        background-repeat:no-repeat;
+    }
+
+    section:before{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background: url(/images/splash.jpg);
+        background-size:100%; /*Can make it bigger like 1800px if it blocks too much of the image
+        background-position:center;
+        mix-blend-mode:screen;
+        background-repeat: no-repeat;
+    }
+*/
+
+
+
+
+    .body19 {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .image-container {
+        position: relative;
+        height:100vh;
+    }
+
+    .bg-image,
+    .overlay-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .overlay-image {
+        z-index: 1;
+        mix-blend-mode: screen;
+    }
+
+    section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .body19 .image-container h1{
+        text-align: center;
+        padding-top: 40px;
+        font-size: 70px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        text-transform: uppercase;
+        color: mediumpurple;
+        z-index:999999;
+    }
+
+
+
+
+    .banner-area8 {
+        width: 100%;
+        height: 600px;
+        position: relative;
+        top: 0;
+        background-image: url("../Images/StoreHead1.jpg");
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .overlay-image2 {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("/images/splash.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        mix-blend-mode: screen;
+    }
+
+    .banner-area8 h2 {
+        text-align: center;
+        padding-top: -80px;
+        font-size: 70px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        text-transform: uppercase;
+        color: mediumpurple;
+        z-index:999;
+    }
+
+
+
+
+</style>
+
+
+<!-- Header Area -->
+<div class="box-area">
+    <div class="banner-area2">
+       <!-- <h2>Store</h2>-->
+    </div>
+</div>
+
+
+<h3 style="color:mediumpurple; margin-top: 20px">Take a look at our products:</h3>
+<p>You might just find something you like</p>
+
+
+<!-- Just testing to see what would happen if I had to dynammically add card items -->
+
+<MudGrid Spacing="6" Justify="Justify.Center" Style="margin-top:40px">
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple; border-top-left-radius: 10px; border-top-right-radius: 50px; border-bottom-left-radius: 50px; border-bottom-right-radius: 10px">
+            <MudCardMedia Image="images/Store1.jpg" Height="150" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Rose</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+                <MudText Typo="Typo.body1" Style="font-family:Georgia; color:mediumpurple">R 16.00</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Buy</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Add to Cart</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple; border-top-left-radius: 10px; border-top-right-radius: 50px; border-bottom-left-radius: 50px; border-bottom-right-radius: 10px">
+            <MudCardMedia Image="images/Store2.jpg" Height="150" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" Style="color:mediumpurple">Flowers</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+                <MudText Typo="Typo.body1" Style="font-family:Georgia; color:mediumpurple">R 10.00</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Buy</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Add to Cart</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple; border-top-left-radius: 10px; border-top-right-radius: 50px; border-bottom-left-radius: 50px; border-bottom-right-radius: 10px">
+            <MudCardMedia Image="images/Store3.jpg" Height="150" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Daisy</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+                <MudText Typo="Typo.body1" Style="font-family:Georgia; color:mediumpurple">R 8.00</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Buy</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Add to Cart</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple; border-top-left-radius: 10px; border-top-right-radius: 50px; border-bottom-left-radius: 50px; border-bottom-right-radius: 10px">
+            <MudCardMedia Image="images/Flowers1.jpg" Height="150" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" Style="color:mediumpurple">Flowers</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+                <MudText Typo="Typo.body1" Style="font-family:Georgia; color:mediumpurple">R 12.00</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Buy</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Add to Cart</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple; border-top-left-radius: 10px; border-top-right-radius: 50px; border-bottom-left-radius: 50px; border-bottom-right-radius: 10px">
+            <MudCardMedia Image="images/Flowers4.jpg" Height="150" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Lavander</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+                <MudText Typo="Typo.body1" Style="font-family:Georgia; color:mediumpurple">R 10.00</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Buy</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Add to Cart</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple; border-top-left-radius: 10px; border-top-right-radius: 50px; border-bottom-left-radius: 50px; border-bottom-right-radius: 10px">
+            <MudCardMedia Image="images/Flowers5.jpg" Height="150" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5" Style="color:mediumpurple">Flowers</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+                <MudText Typo="Typo.body1" Style="font-family:Georgia; color:mediumpurple">R 6.00</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Buy</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Add to Cart</MudButton>
+                <MudButton Href="/userpages" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+
+<div class="body18">
+    <div class="container18">
+        <a href="#"><span>Read More</span></a>
+        <a href="#"><span>Read More</span></a>
+    </div>
+</div>
+
+
+@*<div class="body19">
+<section>
+
+</section>
+</div>*@
+
+<div class="body19">
+    <div class="image-container">
+        <img src="/images/bg.jpg" class="bg-image" />
+        <img src="/images/splash.jpg" class="overlay-image" />
+        <h1>Erin</h1>
+    </div>
+
+</div>
+
+
+
+<div class="box-area8">
+    <div class="banner-area8">
+        <div class="overlay-image2"></div>
+        <h2>Store</h2>
+    </div>
+</div>
+
+
+@code {
+
+}

@@ -1,0 +1,561 @@
+﻿@page "/rolePage"
+
+@attribute [Authorize(Roles = "Admin")]
+
+
+
+<style>
+
+
+    /**********************************/
+
+    .body10 {
+        margin: 0;
+        padding: 0;
+        /*background-color:black;*/
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+    }
+
+    .block10{
+        position: relative;
+        margin: 10% auto 0;
+        width: 50%;
+        height: 450px;
+        background: linear-gradient(0deg, black, rgb(44,43, 43));        
+    }
+
+
+    .glow::before, .glow::after{
+        content: '';
+        position: absolute;
+        left: -2px;
+        top: -2px;
+        background: linear-gradient(45deg, mediumPurple, #ff06ff, #ff0045, #ff00c7, #ff00ff, #ff0099, #6e0dd0, #6e0cdd, deepPink);
+        background-size: 400%;
+        width: calc(100% + 5px);
+        height: calc(100% + 5px);
+        z-index: -1;
+        animation: animate 20s linear infinite;
+    }
+
+
+    @@Keyframes animate{
+        0% {
+            background-position: 0 0;
+        }
+        50% {
+            background-position: 400% 0;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+
+    .glow::after{
+        filter: blur(40px);
+        opacity: 0.6;
+    }
+
+
+
+    /************************************/
+
+
+    :root{
+        --clr-neon: hsl(317 100% 54%);
+        /*--clr-bg: hsl(323 21% 16%);*/
+        --clr-bg: #ff0099;
+    }
+
+    .body11{
+        box-sizing: border-box;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: var(--clr-bg);
+        font-family: "Global Sans Serif";
+        color: var(--clr-neon);
+    }
+
+    .neon-button {
+        font-size: 1.5rem;
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--clr-neon);
+        border: currentColor 0.125em solid;
+        padding: 0.25em 1em;
+        border-radius: 0.25em;
+
+        text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.5), 0 0 0.45em currentColor;
+
+        box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+
+        position: relative;
+ 
+    }
+
+    .neon-button::before {
+        content: '';
+        position: absolute;
+        background: var(--clr-neon);
+        top: 120%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+        filter: blur(1.5em);
+        opacity: 0.inherit;
+    }
+
+    .neon-button::after {
+        content:'';
+        position: absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right: 0;
+        box-shadow: 0 0 2em 0.5em var(--clr-neon);
+        opacity: 0;
+        background-color: var(--clr-neon);
+        z-index:-1;
+        transition: opacity 100ms linear;
+    }
+
+    .neon-button:hover,
+    .neon-button:focus {
+        color: var(--clr-bg);
+        text-shadow: none;
+    }
+
+    
+    .neon-button:hover::before,
+    .neon-button:focus::before {
+        opacity: 1;
+    }
+
+    .neon-button:hover::after,
+    .neon-button:focus::after {
+        opacity: 1;
+    }
+
+
+
+    /************************************/
+
+    .body12{
+        margin: 0;
+        padding: 0;
+        display:flex;
+        background: #031321;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+        font-family: Consolas;
+    }
+
+    .a12{
+        position:relative;
+        display: inline-block;
+        padding: 15px 30px;
+        color: hsl(317 100% 54%); /*Origional color #2196f3*/
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        text-decoration: none;
+        font-size: 18px;
+        overflow: hidden;
+        transition: 0.2s;
+    }
+
+    .a12:hover{
+        color: black; /*#255784*/
+        background: hsl(317 100% 54%);
+        box-shadow: 0 0 10px hsl(317 100% 54%), 0 0 40px hsl(317 100% 54%), 0 0 100px hsl(317 100% 54%);
+        transition-delay: 1s;
+    }
+
+    .a12 .span12 {
+        position: absolute;
+        display: block;
+    }
+
+    .a12 .span12:nth-child(1) {
+        top:0;
+        left:-100%;
+        width: 100%;
+        height: 2px;
+                background: linear-gradient(90deg, transparent, hsl(317 100% 54%));
+    }
+
+    .a12:hover .span12:nth-child(1) {
+        left:100%;
+        transition: 1s;
+    }
+
+
+    .a12 .span12:nth-child(3) {
+        bottom:0;
+        right:-100%;
+        width: 100%;
+        height: 2px;
+            background: linear-gradient(270deg, transparent, hsl(317 100% 54%));
+    }
+
+    .a12:hover .span12:nth-child(3) {
+        right: 100%;
+        transition: 1s;
+        transition-delay: 0.5s;
+    }
+
+
+
+    .a12 .span12:nth-child(2) {
+        top:-100%;
+        right:0;
+        width: 2px;
+        height: 100%;
+            background: linear-gradient(180deg, transparent, hsl(317 100% 54%));
+    }
+
+    .a12:hover .span12:nth-child(2) {
+        top: 100%;
+        transition: 1s;
+        transition-delay: 0.25s;
+    }
+
+
+
+    .a12 .span12:nth-child(4) {
+        bottom:-100%;
+        left:0;
+        width: 2px;
+        height: 100%;
+            background: linear-gradient(360deg, transparent, hsl(317 100% 54%));
+    }
+
+    .a12:hover .span12:nth-child(4) {
+        bottom: 100%;
+        transition: 1s;
+        transition-delay: 0.75s;
+    }
+
+
+
+
+    /**************************************/
+
+
+
+    .body13 {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        background: #031321;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+        font-family: Consolas;
+    }
+
+    .a13 {
+        position: relative;
+        display: inline-block;
+        padding: 15px 30px;
+        color: mediumPurple; /*Origional color #2196f3*/
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        text-decoration: none;
+        font-size: 18px;
+        overflow: hidden;
+        transition: 0.2s;
+        /*-webkit-box-reflect: below 1px linear-gradiet( transparent, white)*/
+    }
+
+    .a13:hover {
+        color: black; /*#255784*/
+            background: mediumPurple;
+            box-shadow: 0 0 10px mediumPurple, 0 0 40px mediumPurple, 0 0 100px mediumPurple;
+        transition-delay: 1s;
+    }
+    
+    .a13 .span13 {
+        position: absolute;
+        display: block;
+    }
+    
+    .a13 .span13:nth-child(1) {
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+                background: linear-gradient(90deg, transparent, mediumPurple);
+        animation: animate1 1s linear infinite;
+    }
+
+    @@keyframes animate1{
+        0%{
+            left: -100%;
+        }
+        50%, 100%{
+            left:100%;
+        }
+    }
+    
+    
+    .a13 .span13:nth-child(2) {
+        top: -100%;
+        right: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(180deg, transparent, mediumPurple);
+        animation: animate2 1s linear infinite;
+        animation-delay: 0.25s;
+    }
+
+    @@keyframes animate2 {
+        0% {
+            top: -100%;
+        }
+
+        50%, 100% {
+            top: 100%;
+        }
+    }
+
+    
+    .a13 .span13:nth-child(3) {
+        bottom: 0;
+        right: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(270deg, transparent, mediumPurple);
+        animation: animate3 1s linear infinite;
+        animation-delay: 0.5s;
+    }
+    
+    @@keyframes animate3 {
+        0% {
+            right: -100%;
+        }
+
+        50%, 100% {
+            right: 100%;
+        }
+    }
+    
+    
+    
+    .a13 .span13:nth-child(4) {
+        bottom: -100%;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(360deg, transparent, mediumPurple);
+        animation: animate4 1s linear infinite;
+        animation-delay: 0.75s;
+    }
+    
+    @@keyframes animate4 {
+        0% {
+            bottom: -100%;
+        }
+
+        50%, 100% {
+            bottom: 100%;
+        }
+    }
+
+
+
+    /*********************************************/
+
+    .body14{
+        margin: 0;
+        padding: 0;        
+    }
+
+    .section14{
+        height: 80vh;
+        background: #000;
+    }
+
+    .h14{
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        text-align: center;
+        color: mediumPurple;
+        font-size: 5em;
+        font-family: sans-serif;
+        letter-spacing: 0.2em;       
+    }
+
+    .h14 .span14{
+        opacity: 0;
+        display: inline-block;
+        animation: animate14 1s linear forwards;
+    }
+
+    @@keyframes animate14 {
+        0% {
+            opacity: 0;
+            transform: rotateY(90deg);
+            filter:blur(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: rotateY(0deg);
+            filter: blur(0px);
+        }
+    }
+
+
+    .section14:before{
+        content: '';
+        position: absolute;
+        top:0;
+        left: 0;
+        width:100%;
+        height: 100%;
+        /*background: linear-gradient(to right, #f00, #f00, #0f0, #0ff, #ff0, #0ff);*/
+        background: linear-gradient(to right, mediumPurple, HotPink, DeepPink, SlateBlue, #0ff, Blue, #0ff);
+        mix-blend-mode:color;
+        pointer-events: none;
+
+    }
+
+    .video{
+        object-fit:cover;
+    }
+
+    .h14 .span14:nth-child(1){
+        animation-delay: 1s;
+    }
+
+    .h14 .span14:nth-child(2){
+        animation-delay: 2s;
+    }
+
+    .h14 .span14:nth-child(3){
+        animation-delay: 2.3s;
+    }
+
+    .h14 .span14:nth-child(4) {
+        animation-delay: 2.6s;
+    }
+
+    .h14 .span14:nth-child(5) {
+        animation-delay: 3s;
+    }
+
+    .h14 .span14:nth-child(6){
+        animation-delay: 3.4s;
+    }
+
+    .h14 .span14:nth-child(7) {
+        animation-delay: 3.8s;
+    }
+
+</style>
+
+
+
+<div class="body14">
+<section class="section14">
+
+    <video controls="controls" autoplay muted class="video">
+        <source src="/videos/smoke.mp4" type="video/mp4" />
+    </video>
+
+    <h1 class="h14">
+        <span class="span14">F</span>
+        <span class="span14">l</span>
+        <span class="span14">o</span>
+        <span class="span14">w</span>
+        <span class="span14">e</span>
+        <span class="span14">r</span>
+        <span class="span14">s</span>
+    </h1>
+</section>
+</div>
+
+
+
+
+
+@*
+
+<h3>RolePage</h3>
+
+
+<a class="a13" href="#">
+    <span class="span13"></span>
+    <span class="span13"></span>
+    <span class="span13"></span>
+    <span class="span13"></span>
+    Neon Button
+</a>
+
+
+<div class="body13">
+    <a class="a13" href="#">
+    <span class="span13"></span>
+    <span class="span13"></span>
+    <span class="span13"></span>
+    <span class="span13"></span>
+    Neon Button
+    </a>
+</div>
+
+
+<div>
+    <h1>Beliefs</h1>
+    <p>At </p>
+
+
+
+
+</div>
+
+
+<a style="margin:20px" class="neon-button">Lets Go</a>
+
+
+<div class="body10" >
+    
+    <div class="block10 glow">
+        <h1 style="color:mediumpurple; padding-left: 40px; padding-top: 40px; font-size: 28px">Beliefs</h1>
+        <p style="color:white; padding: 40px; font-size: 20px">
+            Hi there, we love that you visited us today
+        </p>
+
+        
+
+        <div style="position: absolute; bottom:15px; right:15px;">
+
+            <a class="a12" href="#">
+                <span class="span12"></span>
+                <span class="span12"></span>
+                <span class="span12"></span>
+                <span class="span12"></span>
+                Find Out More
+            </a>
+
+        </div>
+        
+        
+    </div>
+
+</div>
+*@
+
+
+@code {
+
+}

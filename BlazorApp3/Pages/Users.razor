@@ -1,0 +1,66 @@
+﻿@page "/users"
+
+
+<!-- ******************************************************************
+    Gets the wrong users was only supposed to get me.
+    Because both databases have the same table name it gets it from that
+    so, do not add any users or anything/ Also initialized the connection 
+    string to use the other one.
+******************************************************************* -->
+
+<h3 style="color:mediumpurple; margin-bottom: 25px">Users</h3>
+
+@*
+@using DataAccessLibrary
+@using DataAccessLibrary.Models
+
+@inject IUserData _dataAccess
+
+
+<h3 style="color:red;">Users</h3>
+
+
+<h4>Current Users</h4>
+
+@if (users is null)
+{
+    <p><em>Loading ...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead style="color:red">
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>         
+            </tr>
+        </thead>
+        <tbody style="color:white">
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<UserModel> users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await _dataAccess.GetUsers();
+    }
+}*@
+
+
+
+
+@code {
+    
+
+}

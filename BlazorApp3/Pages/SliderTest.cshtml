@@ -1,0 +1,119 @@
+﻿@page "/sliderTest"
+@model BlazorApp3.Pages.SliderTestModel
+@{
+}
+
+
+
+
+
+
+<style>
+    .slider {
+        position: relative;
+    }
+
+    .slide {
+        display: none;
+    }
+
+        .slide.selected {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+        }
+
+    .thumbnails {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    .thumbnail {
+        width: calc(33.333% - 10px);
+        float: left;
+        margin: 5px;
+    }
+
+        .thumbnail img {
+            width: 100%;
+        }
+
+    .info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+        .info h2,
+        .info h3 {
+            margin: 0;
+        }
+</style>
+
+<div class="slider">
+    <div class="slide selected">
+        <img src="/images/Flowers1.jpg" alt="Selected Image">
+        <div class="info">
+            <h2>Selected Image Title</h2>
+            <p>Selected Image Description</p>
+            <button>Learn More</button>
+        </div>
+    </div>
+    <div class="thumbnails">
+        <div class="thumbnail">
+            <img src="/images/Flowers3.jpg" alt="Thumbnail 1">
+            <div class="info">
+                <h3>Thumbnail 1 Title</h3>
+                <p>Thumbnail 1 Description</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <img src="/images/Flowers3.jpg" alt="Thumbnail 2">
+            <div class="info">
+                <h3>Thumbnail 2 Title</h3>
+                <p>Thumbnail 2 Description</p>
+            </div>
+        </div>
+        <div class="thumbnail">
+            <img src="/images/Flowers1.jpg" alt="Thumbnail 3">
+            <div class="info">
+                <h3>Thumbnail 3 Title</h3>
+                <p>Thumbnail 3 Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script>
+    let thumbnails = document.querySelectorAll('.thumbnail');
+    let selectedImage = document.querySelector('.selected img');
+
+    for (let i = 0; i < thumbnails.length; i++) {
+        let thumbnail = thumbnails[i];
+        thumbnail.addEventListener('click', function () {
+            let thumbnailImage = thumbnail.querySelector('img');
+            selectedImage.src = thumbnailImage.src;
+        });
+    }
+
+
+
+    function slideImages(thumbnail) {
+        let thumbnails = document.querySelectorAll('.thumbnail');
+        let selectedThumbnailIndex;
+        for (let i = 0; i < thumbnails.length; i++) {
+            if (thumbnails[i] === thumbnail) {
+                selectedThumbnailIndex = i;
+                break;
+            }
+        }
+        let distanceToMove = selectedThumbnailIndex * -100;
+        for (let i = 0; i < thumbnails.length; i++) {
+            thumbnails[i].style.transform = `translateX(${distanceToMove}%)`;
+        }
+    }
+
+        </script>

@@ -1,0 +1,38 @@
+﻿@page "/authors/authorsDetails/{authorId:int}"
+@page "/authors/authorsDetails"
+@page "/author"
+
+<h3 style="color:mediumpurple">AuthorDetails</h3>
+
+<hr />
+
+<p>@AuthorId/ JK Rowling / Harry Potter</p>
+
+
+<div col-12 row>
+    <h5 class="col-12 row"></h5>
+    <h6 class="col-12 row"></h6>
+    <h6 class="col-12 row"></h6>
+</div>
+
+<hr />
+
+<div col-12 row> </div>
+<div col-12 row> </div>
+
+
+@code {
+
+    [Parameter]
+    public int AuthorId { get; set; }
+
+
+    //public Author AuthorDetails { get; set; }
+    //public AuthorService authorService { get; set; }
+
+    //protected override void OnInitialized()
+    //{
+    //    authorService = new AuthorService();
+    //    AuthorDetails = authorService.GetAuthorityId(AuthorId);
+    //}
+}

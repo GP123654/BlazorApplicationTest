@@ -1,0 +1,182 @@
+﻿@page "/userPages"
+
+@using DataAccessLibrary
+@using DataAccessLibrary.Models
+@using Syncfusion.Blazor
+
+
+@inject IUserPagesData _dataAccess
+
+
+<style>
+    ::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+
+    /* Scroll bar track */
+    ::-webkit-scrollbar-track {
+        background: #1a1a1a; /*#121212*/
+    }
+
+    /* Scroll bar movable thing / thumb */
+    ::-webkit-scrollbar-thumb {
+        background: mediumPurple;
+        border-radius: 10px;
+    }
+</style>
+
+
+<PageTitle>User Pages</PageTitle>
+
+<h3 style="color:mediumPurple;">User Pages</h3>
+
+<hr style="height:2px; background-color:black; margin-bottom: 5px; margin-right: 40%; margin-bottom:20px" />
+
+@if (userPages is null)
+{
+    <p><em>Loading ...</em></p>
+
+    <!-- Skeleton lines when loading just for fun -->
+    <MudSkeleton Height="40px"/>
+    <MudSkeleton Height="40px"/>
+    <MudSkeleton Height="40px"/>
+    <MudSkeleton Height="40px"/>
+    <MudSkeleton Height="40px"/>
+    <MudSkeleton Height="40px"/>
+    <MudSkeleton Height="40px"/>
+}
+else
+{
+    <!--overflow-x: auto; background-color:black-->
+    <!-- Creating a table to display the data -->
+    <MudSimpleTable Dense="@dense" Bordered="@bordered" FixedHeader="@fixedheader" Style="@(fixedheader?"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple":"height:400px; overflow-x: auto; box-shadow:2px 2px 2px 2px mediumPurple")">
+        <!-- Heading section -->
+        <thead Style="color:mediumPurple;">
+            <!-- Row for the headings -->
+            <tr>
+                <!-- Heading for each column -->
+                <th>User ID</th>
+                <th>Web Page</th>
+                <th>Create Date</th>
+            </tr>
+        </thead>
+        <!-- Table body section -->
+        <tbody>
+            <!-- Foreach loop that goes throught all the list items -->
+            @foreach (var userPage in userPages)
+            {
+                <!-- Creating a row for each list item -->
+                <tr>
+                    <td style="color:hotpink">@userPage.UserId</td>
+                    <td>@userPage.WebPage</td>
+                    <td>@userPage.CreateDate</td>
+                </tr>
+            }
+        </tbody>
+            
+    </MudSimpleTable>
+ 
+    <MudToolBar>
+        <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+        <MudSwitch @bind-Checked="@bordered" Color="Color.Info">Bordered</MudSwitch>
+        <MudSwitch @bind-Checked="@fixedheader" Color="Color.Primary">Fixed Header</MudSwitch>
+    </MudToolBar>
+
+}
+
+<!-- CODE SECTION -->
+
+@code {
+
+    private bool dense = false;
+    private bool bordered = false;
+    bool fixedheader = true;
+
+    //List for storing UserPagesModel objects
+    private List<UserPagesModel> userPages;
+
+    //
+    protected override async Task OnInitializedAsync()
+    {
+        //
+        userPages = await _dataAccess.GetUserPages();
+    }
+
+
+
+
+
+    
+
+
+@*<MudTable Items="@userPages" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<UserPagesModel,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Periodic Elements</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Nr</MudTh>
+            <MudTh>Sign</MudTh>
+            <MudTh>Name</MudTh>
+            <MudTh>Position</MudTh>
+            <MudTh>Molar mass</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context.Number</MudTd>
+            <MudTd DataLabel="Sign">@context.Sign</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Position">@context.Position</MudTd>
+            <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+    <div class="d-flex flex-wrap mt-4">
+        <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+        <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+        <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+        <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+        <MudSpacer />
+        <div style="min-width:200px;">
+            <MudText Inline="true" Class="align-self-center">Selected1: @selectedItem1?.Name</MudText>
+        </div>
+    </div>
+    @code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+
+    private string searchString1 = "";
+    private UserPagesModel selectedItem1 = null;
+    private HashSet<UserPagesModel> selectedItems = new HashSet<UserPagesModel>();
+
+    //List for storing UserPagesModel objects
+    private List<UserPagesModel> userPages;
+
+    //
+    protected override async Task OnInitializedAsync()
+    {
+        //
+        userPages = await _dataAccess.GetUserPages();
+    }
+
+    private bool FilterFunc1(UserPagesModel element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(UserPagesModel element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.UserId.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        //if (element.WebPage.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        //    return true;
+        if ($"{element.WebPage} {element.CreateDate}".Contains(searchString))
+            return true;
+        return false;
+    }*@
+}
+

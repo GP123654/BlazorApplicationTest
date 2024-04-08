@@ -1,0 +1,164 @@
+﻿@page "/todo"
+@using BlazorApp3.Data;
+
+<!-- Adds a count of how many items are not done -->
+<h3 style="color:mediumpurple;">ToDo (@todos.Count(todo => !todo.IsDone))</h3>
+
+<h5>Know what you have to do and when you have to do it by so that all your flower related needs can be accomplished.</h5>
+
+<style>
+
+    /* Input box style */
+    .inputBox {
+        border: solid 2px mediumPurple;
+        padding: 5px;
+        border-radius: 20px;
+        margin-top: 5px;
+    }
+
+    .margin1 {
+        margin-left: 26px;
+    }
+
+    /* Check box style */
+    .regular-checkbox {
+        -webkit-appearance: none;
+        background-color: #fafafa;
+        border: 1px solid mediumPurple;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+        padding: 9px;
+        border-radius: 3px;
+        display: inline-block;
+        position: relative;
+    }
+
+    .regular-checkbox:active, .regular-checkbox:checked:active {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .regular-checkbox:checked {
+        background-color: #e9ecee;
+        border: 1px solid mediumPurple;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+        color: mediumPurple;
+    }
+
+    .regular-checkbox:checked:after {
+        content: '\2714';
+        font-size: 14px;
+        position: absolute;
+        top: 0px;
+        left: 3px;
+        color: mediumPurple;
+    }
+
+
+    .button1 {
+        padding: 8px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button3 {
+        background-color: rgba(0, 0, 0, 0);
+        color: black;
+        border: 2px solid mediumPurple;
+        border-radius: 25px;
+        margin-left: 10px;
+    }
+
+
+    .button1:hover {
+        background-color: rgba(0, 0, 0, 0);
+        color: mediumPurple;
+        border: 2px solid mediumPurple;
+        border-radius: 25px;
+        margin-left: 10px;
+    }
+
+</style>
+
+
+<ul>
+    <div class="row" style="margin-bottom:15px">
+        <div class="col-4">
+            Item:
+        </div>
+        <div class="col-4">
+            Due Date:
+        </div>
+    </div>
+
+    <!-- Foreach loop to iterate over of the to do list items-->
+    @foreach (var todo in todos)
+    {
+        <!-- List items with their names and if they have been finished -->
+        <li>
+            <!-- Checkbox that is bound to the IsDone variable-->
+            <input class="regular-checkbox" type="checkbox" @bind="todo.IsDone" />
+            <!-- List item title that is bound to the Title variable-->
+            <input class="inputBox" @bind="todo.Title" />
+            <!-- List item due date that is bound to the DueDate variable-->
+            <input class="inputBox" type="date" @bind="todo.DueDate" />
+            <!-- List item creation date that is bound to the DateCreated variable-->
+            <input class="inputBox" type="datetime" @bind="todo.DateCreated" />
+
+            <!--
+            <p>Item: @newTodo / Due Date: @DateDue / Date Created: @CreationDate"</p>
+            -->
+        </li>
+    }
+</ul>
+
+
+<!-- Input area with placeholder text, that also binds the input to the newTodo variable -->
+<input class="inputBox margin1" placeholder="Something todo" @bind="newTodo" />
+<!-- Input area with placeholder text, that also binds the input to the newTodo variable -->
+<input class="inputBox" placeholder="Due Date" @bind="DateDue" type="date" /> <!--@bind:format="yyyy-mm-dd"-->
+<!-- Button that calls the AddTodo method when it is clicked-->
+<button @onclick="AddTodo" class="button1 button3">Add item</button>
+
+<!-- If the item title is not empty -->
+@if (!string.IsNullOrEmpty(newTodo))
+{
+    <!-- It will show some text with the item name and the date it is due -->
+    <p>@newTodo Due: @DateDue?.ToShortDateString()</p>
+}
+
+
+<!-- CODE PART -->
+
+@code {
+
+    //List to store to do items (objects of the TodoItems class)
+    private List<TodoItem> todos = new();
+    //Gets the title of the new to do item
+    private string? newTodo;
+    //Gets the date due of the new to do item
+    private DateTime? DateDue;
+    //Gets the creation date of the new to do item
+    private DateTime? CreationDate = DateTime.Now;
+
+    /// <summary>
+    /// Adds a to do item to a list that gets displayed
+    /// </summary>
+    private void AddTodo()
+    {
+        //If the new to do input area is not empty
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            //Adds a new to do item to the list with the title that was inputted
+            todos.Add(new TodoItem { Title = newTodo, DueDate = DateDue, DateCreated = CreationDate });
+            //Sets the input to being empty after items title has been added
+            newTodo = string.Empty;
+            //Sets the input to null after the items due date has been added
+            DateDue = null;
+            //
+            CreationDate = DateTime.Now;
+        }
+    }
+}

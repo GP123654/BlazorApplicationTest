@@ -1,0 +1,352 @@
+﻿@page "/employee"
+
+<h3>Employees</h3>
+
+
+
+
+<style>
+
+/* body style */
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    /*background:#0e0e0e;*/
+}
+
+/*  style */
+.container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1000px;
+    transform-style: preserve-3d;
+    /*background: #1f32;*/
+}
+
+/*  style */
+.container .box
+{
+    position: relative;
+    width: 260px;
+    height: 400px;
+    margin: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* background: rgba(255, 255, 255, 0.3);*/
+    background: rgba(245, 25, 45, 0.2);
+    border-radius: 25px;
+    transform-style: preserve-3d;
+            box-shadow: 0 4px 30px mediumPurple;
+            backdrop-filter: blur(5px);
+}
+
+/*  style */
+.container .box::before{
+    content: 'EMPLOYEE';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 3em;
+    font-weight: 900;
+    color: black;
+    font-style: italic;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+/*  style */
+.container .box::after{
+    content: 'INFO';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 5em;
+    font-weight: 900;
+    color: black;
+    font-style: italic;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+/*  style */
+.container .box:hover::before,
+.container .box:hover::after{
+    opacity: 0.04;
+}
+
+/*  style */
+.container .box .name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: mediumpurple;
+    width: 100%;
+    transform-style: preserve-3d;
+    transform: translate3d(0,0,75px);
+    transition: 0.5s;
+    opacity: 1;
+    z-index: 10;
+}
+
+/*  style */
+.container .box:hover .name{
+    top: 40px;
+    opacity: 1;
+}
+
+/*  style */
+.container .box .info{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform-style: preserve-3d;
+    transform: translate3d(-50%,0,75px);
+    color: #fff;
+    background: #1b1b1b;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 10;
+}
+
+/*  style */
+.container .box:hover .info {
+    bottom: 30px;
+    opacity: 1;
+}
+
+/*  style */
+.container .box .circle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    transition: 0.5s;
+    background: #fff;
+    transform-style: preserve-3d;
+    z-index: 10;
+    opacity: 1;
+    transform: translate3d(-50%,-50%,50px);
+}
+
+/*  style */
+.container .box .product {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 240px;
+    max-height: 220px;
+    transition: 0.5s;
+    z-index: 11;
+    transform-style: preserve-3d;
+    transform: translate3d(-50%,-50%,100px) rotate(-5deg);
+}
+
+/*  style */
+.container .box:hover .product{
+    transform: translate3d(-50%,-50%,100px) rotate(-5deg);
+}
+
+/* the circle and button colour style */
+.container .box:nth-child(1) .circle,
+.container .box:nth-child(1) .info{
+    background: #8E24AA;
+}
+
+.container .box:nth-child(2) .circle,
+.container .box:nth-child(2) .info{
+    background: #7B1FA2;
+}
+
+.container .box:nth-child(3) .circle,
+.container .box:nth-child(3) .info{
+    background: #6A1B9A;
+}
+
+.container .box:nth-child(4) .circle,
+.container .box:nth-child(4) .info{
+    background: #7B1FA2;
+}
+
+.container .box:nth-child(5) .circle,
+.container .box:nth-child(5) .info{
+    background: #8E24AA;
+}
+
+.container .box:nth-child(6) .circle,
+.container .box:nth-child(6) .info {
+    background: #6A1B9A;
+}
+
+
+/****************************/
+
+.body2
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+    .container3 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 1000px;
+        transform-style: preserve-3d;
+        background-color: #1f32;
+    }
+
+.container2{
+    width: 100%;
+    height: 100vh;
+    background-color:#1f32;
+    /*
+    background-image: url(~/images/Flowers1.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;*/
+}
+
+.card{
+    width: 90%;
+    max-width: 440px;
+    color: #fff;
+    text-align: center;
+    padding: 50px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px mediumPurple;
+    backdrop-filter: blur(25px);
+}
+
+
+.card img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+
+.card h2{
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 20px;
+    color: black;
+}
+
+.card p{
+    font-size: 18px;
+    margin: 10px auto;
+    max-width: 330px;
+    color: black;
+}
+
+.btn8{
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    background: mediumPurple;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 30px;
+    margin: 30px 0 10px;
+}
+
+
+
+
+</style>
+
+
+
+
+
+
+<!-- Information cards -->
+<div class="body">
+    <div class="container">
+        <div class="box" data-tilt data-tilt-max="50" data-tilt-speed="400">
+            <h2 class="name">Bob</h2>
+            <a href="/employee2" class="info">Learn More</a>
+            <div class="circle"></div>
+            <img src="/images/Employee1.jpg" class="product" />
+        </div>
+
+        <div class="box">
+            <h2 class="name">Jessica</h2>
+            <a href="/employee2" class="info">Learn More</a>
+            <div class="circle"></div>
+            <img src="/images/Employee2.jpg" class="product" />
+        </div>
+
+        <div class="box">
+            <h2 class="name">Emma</h2>
+            <a href="/employee2" class="info">Learn More</a>
+            <div class="circle"></div>
+            <img src="/images/Employee3.jpg" class="product" />
+        </div>
+
+        <div class="box" data-tilt data-tilt-max="50" data-tilt-speed="400">
+            <h2 class="name">Daisy</h2>
+            <a href="/employee2" class="info">Learn More</a>
+            <div class="circle"></div>
+            <img src="/images/Employee4.jpg" class="product" />
+        </div>
+
+        <div class="box">
+            <h2 class="name">Amy</h2>
+            <a href="/employee2" class="info">Learn More</a>
+            <div class="circle"></div>
+            <img src="/images/Employee5.jpg" class="product" />
+        </div>
+
+        <div class="box">
+            <h2 class="name">Dylan</h2>
+            <a href="/employee2" class="info">Learn More</a>
+            <div class="circle"></div>
+            <img src="/images/Employee6.jpg" class="product" />
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="body2">
+    <div class="container3">
+        <div class="card">
+            <img src="/images/Employee1.jpg" />
+            <h2 class="name">Bob</h2>
+            <p>Marketing Manager</p>
+            <div class="links">
+                <MudIconButton Href="" Icon="@Icons.Custom.Brands.Twitter" Color="Color.Secondary"></MudIconButton>
+                <MudIconButton Href="" Icon="@Icons.Custom.Brands.Facebook" Color="Color.Primary"></MudIconButton>
+                <MudIconButton Href="" Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Info"></MudIconButton>
+            </div>
+            <a href="/employee2" class="btn8">Learn More</a>
+        </div>     
+    </div>
+</div>
+
+
+
+@code {
+
+}

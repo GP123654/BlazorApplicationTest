@@ -1,0 +1,317 @@
+﻿@page "/"
+
+
+<style>
+
+    .body2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;/*Was 85*/
+    margin: 0;
+    padding: 0;
+    /*background-color: #F3E5F5*/
+    }
+
+    .box2 {
+        position: absolute; /*relative*/
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        animation: animate 30s linear infinite;
+    }
+    
+    @@keyframes animate {
+        0% {
+            transform: perspective(800px) rotateY(0deg);/*was 800px*/
+        }
+    
+        100% {
+            transform: perspective(800px) rotateY(360deg);
+        }
+    }
+    
+    .box2 span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+        transform-style: preserve-3d;
+        transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);/*was 400*/
+        -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
+    }
+    
+    .box2 span img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    @@media (max-width: 980px) {
+
+        .body2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh; /*Was 85*/
+            /*max-height: 30vh;*/
+            margin: 0;
+            padding: 0;
+            /*background-color: #F3E5F5*/
+        }
+
+        .box2 {
+            position: absolute; /*relative*/
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: animate 30s linear infinite;
+        }
+
+        .box2 span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+        transform-style: preserve-3d;
+        transform: rotateY(calc(var(--i) * 45deg)) translateZ(300px);/*was 400*/
+        -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #0004);
+    }
+
+        @@keyframes animate {
+            0% {
+                transform: perspective(800px) rotateY(0deg); /*was 800px*/
+            }
+
+            100% {
+                transform: perspective(800px) rotateY(360deg);
+            }
+        }
+    }
+
+
+
+
+    .banner-area2 {
+        width: 100%;
+        height: 300px; /*was 400*/
+        position: relative;
+        top: 0;
+        background-image: url("../Images/Flowers3.jpg");
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .banner-area2 h2 {
+        text-align: center;
+        padding-top: 100px; /*was 150*/
+        font-size: 70px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-transform: uppercase;
+        color: white; /*Was #fff*/
+    }
+
+</style>
+
+
+<PageTitle>Home</PageTitle>
+
+<!-- Header Area -->
+<div class="box-area">
+    <div class="banner-area2">
+        <h2>Home</h2>
+    </div>
+</div>
+
+
+
+<h1 style="color:mediumpurple; margin-bottom:10px; margin-top:30px">Hello, welcome to our website</h1>
+
+<p style="margin-bottom:20px">This is your new app where you can make your dreams come true</p>
+
+<h4 style="color:mediumpurple; margin-bottom:30px">Find Out More About Us</h4>
+
+<!-- Using a mudblazor cards -->
+<MudGrid Spacing="5" Justify="Justify.Center">
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple">
+            <MudCardMedia Image="images/Flowers1.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Flowers</MudText>
+                <MudText Typo="Typo.body2">Flowers are very interesting.</MudText>
+                <MudText Typo="Typo.body2">So, Learn some fun facts about flowers.</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/commingSoon" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple">
+            <MudCardMedia Image="images/Flowers4.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Displaying</MudText>
+                <MudText Typo="Typo.body2">Displaying flowers is challenging but fun.</MudText>
+                <MudText Typo="Typo.body2">Follow this guide to help you</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/commingSoon" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+
+    <MudItem>
+        <MudCard Style="box-shadow:5px 5px 5px mediumPurple">
+            <MudCardMedia Image="images/Flowers3.jpg" Height="100" />
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Choosing</MudText>
+                <MudText Typo="Typo.body2">Choosing the correct flower can be hard.</MudText>
+                <MudText Typo="Typo.body2">So, we thought we would help you choose.</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Href="/commingSoon" Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+
+<!-- Using a mudblazor chart -->
+<div style="margin-top: 50px; background-color:#D1C4E9">
+    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Indexs" XAxisLabels="@XAxisLabels" Width="100%" Height="350px"></MudChart>
+</div>
+@*<MudText Typo="Typo.h6">Selected portion of the chart: @Indexs</MudText>
+*@
+
+<!-- Using a component and customizing the instance of it a bit -->
+<Counter IncrementAmount="10" />
+
+
+<h4 style="color:mediumpurple; margin-top:40px">FAQs</h4>
+
+<MudExpansionPanels Style="margin-top: 20px">
+    <MudExpansionPanel Text="How do I buy flowers" MaxHeight="150" Style="color:mediumpurple; box-shadow:2px 2px 2px 2px mediumPurple">
+        <p style="color:black">Go to the product page</p>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Information about flowers" MaxHeight="500" Style="color:mediumpurple; box-shadow:2px 2px 2px 2px mediumPurple">
+        <p style="color:black">Please see the flower info page</p>
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="How do you do a pivot table in blazor" MaxHeight="1000" Style="color:mediumpurple; box-shadow:2px 2px 2px 2px mediumPurple">
+        <p style="color:black">I do not know.</p>
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+
+
+<!-- Using a mudblazor timeline -->
+<h4 style="color:mediumpurple; margin-bottom:30px; margin-top:40px">Where we see ourselves going</h4>
+
+<MudTimeline> @*Style="background-color:#D1C4E9">*@
+
+    <MudTimelineItem Color="Color.Primary" Size="Size.Large">
+        <ItemOpposite>
+            <MudText Color="Color.Primary" Typo="Typo.h5">April</MudText>
+        </ItemOpposite>
+        <ItemContent>
+            <MudText Color="Color.Primary" Typo="Typo.h6" GutterBottom="true">Figure Out Pivots In Blazor</MudText>
+            <MudText>Having a few problems trying to figure this out. Is it even possible? Maybe will have to ask Ernest or Mike.</MudText>
+        </ItemContent>
+    </MudTimelineItem>
+ 
+    <MudTimelineItem Color="Color.Secondary" Size="Size.Small">
+        <ItemOpposite>
+            <MudText Color="Color.Secondary" Typo="Typo.h5">May</MudText>
+        </ItemOpposite>
+        <ItemContent>
+            <MudText Color="Color.Secondary" Typo="Typo.h6" GutterBottom="true">Finish Flower Website</MudText>
+            <MudText>Will be fun to finish this and try different syling things and maybe add a shopping section as well as other things. Might have to use othere data though.</MudText>
+        </ItemContent>
+    </MudTimelineItem>
+    
+    <MudTimelineItem Color="Color.Primary" Size="Size.Small">
+        <ItemOpposite>
+            <MudText Color="Color.Primary" Typo="Typo.h5">June</MudText>
+        </ItemOpposite>
+        <ItemContent>
+            <MudText Color="Color.Primary" Typo="Typo.h6" GutterBottom="true">Sell Flowers and Website</MudText>
+            <MudText>Sell the site once it is finished and become a billionare. Then have fun doing stuff.</MudText>
+        </ItemContent>
+    </MudTimelineItem>
+</MudTimeline>
+
+
+<!-- Gallery -->
+<h1 style="font-size:28px; margin-top: 40px; text-align:center; color:mediumpurple">SEE OUR GALLERY</h1>
+<div class="body2">
+    <div class="box2">
+        <span style="--i:1;"><img src="images/Flowers1.jpg" /></span>
+        <span style="--i:2;"><img src="images/Flowers2.jpg" /></span>
+        <span style="--i:3;"><img src="images/Flowers3.jpg" /></span>
+        <span style="--i:4;"><img src="images/Flowers4.jpg" /></span>
+        <span style="--i:5;"><img src="images/Flowers5.jpg" /></span>
+        <span style="--i:6;"><img src="images/Weather.jpg" /></span>
+        <span style="--i:7;"><img src="images/Weather2.jpg" /></span>
+        <span style="--i:8;"><img src="images/Weather3.jpg" /></span>
+    </div>
+    <MudButton Href="/gallery" Variant="Variant.Filled" Color="Color.Primary" Style="border-radius:30px; margin-top:700px; text-align:center;">Take A Look</MudButton>
+</div>
+
+<!-- Using a mudblazor star ratings -->
+<div class="d-flex flex-column align-center" style="margin-top:60px">
+    <MudRating @bind-SelectedValue="selectedVal" HoveredValueChanged="HandleHoveredValueChanged" />
+    <MudText Typo="Typo.subtitle2" Class="deep-purple-text mt-2">@LabelText</MudText>
+</div>
+
+
+
+<!-- CODE SECTION -->
+
+@code {
+
+    //--------------------------------------------------------//
+    //Bar Chart
+
+    //If you want to know which bar has been clicked on
+    private int Indexs = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+    //Populating the bar chart with default values
+    public List<ChartSeries> Series = new List<ChartSeries>()
+    {
+        new ChartSeries() { Name = "Flowers", Data = new double[] { 40, 20, 25, 27} },
+        new ChartSeries() { Name = "People", Data = new double[] { 19, 24, 35, 13 } },
+    };
+
+    //Labels for the X axis
+    public string[] XAxisLabels = { "Jan", "Feb", "Mar", "Apr"};
+
+
+    //--------------------------------------------------------//
+    //Star ratings
+
+    //Initializing the selected value to 0
+    private int selectedVal = 0;
+    //For storing the hovered value
+    private int? activeVal;
+    //Sets the hovered value
+    private void HandleHoveredValueChanged(int? val) => activeVal = val;
+    //Changes the text based on the hovered or selected number of stars
+    private string LabelText => (activeVal ?? selectedVal) switch
+    {
+        1 => "OK",
+        2 => "Not bad",
+        3 => "Good enough",
+        4 => "Great",
+        5 => "Amazing!",
+        _ => "Rate our website!"
+    };
+}
